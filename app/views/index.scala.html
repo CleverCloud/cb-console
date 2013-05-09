@@ -1,7 +1,28 @@
-@(message: String)
+@(myForm: Form[LoginData])
 
-@main("Welcome to Play 2.1") {
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main("Couchbase - Clever Cloud") {
     
-    @play20.welcome(message)
+    @form(action = routes.Application.authenticate, 'class -> "form-signin", 'enctype -> "multipart/form-data") {
+      <h2 class="form-signin-heading">CB credentials</h2>
+      <fieldset>
+        @inputText(
+          myForm("username"),
+          'placeholder -> "Username",
+          'class -> "input-block-level")
+        @inputPassword(
+          myForm("password"),
+          'placeholder -> "Password",
+          'class -> "input-block-level")
+        @inputText(
+          myForm("host"),
+          'placeholder -> "Host",
+          'class -> "input-block-level")
+      </fieldset>
+      <br />
+      <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    }
     
 }
